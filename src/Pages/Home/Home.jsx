@@ -1,4 +1,5 @@
 import Care from "./Care/Care";
+import DoctorAppoinment from "./DoctorAppoinment/DoctorAppoinment";
 import Hero from "./Hero/Hero";
 import "./Home.css";
 import InfoCards from "./InfoCards/InfoCards";
@@ -11,6 +12,7 @@ const Home = () => {
       <InfoCards></InfoCards>
       <Services></Services>
       <Care></Care>
+      <DoctorAppoinment></DoctorAppoinment>
     </div>
   );
 };
