@@ -1,0 +1,13 @@
+.site-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #19d3ae 0%, #0fcfec 100%);
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.site-button:hover {
+  background: linear-gradient(-90deg, #19d3ae 0%, #0fcfec 100%);
+}
