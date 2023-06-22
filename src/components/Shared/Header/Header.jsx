@@ -22,10 +22,7 @@ const Header = () => {
       <div className="site-container">
         <div className="navbar bg-base-100">
           <div className="flex-1">
-            <Link
-              className="btn btn-ghost text-primary normal-case text-xl"
-              to={"/"}
-            >
+            <Link className="btn btn-ghost  normal-case text-xl" to={"/"}>
               Doctors Portal
             </Link>
           </div>
