@@ -1,3 +1,4 @@
+import Care from "./Care/Care";
 import Hero from "./Hero/Hero";
 import "./Home.css";
 import InfoCards from "./InfoCards/InfoCards";
@@ -9,6 +10,7 @@ const Home = () => {
       <Hero></Hero>
       <InfoCards></InfoCards>
       <Services></Services>
+      <Care></Care>
     </div>
   );
 };
