@@ -1,0 +1,9 @@
+.header-menu a {
+  padding: 7px 20px;
+  border-radius: 5px;
+}
+
+.header-menu a.active {
+  background: #3a4256;
+  color: #fff;
+}
