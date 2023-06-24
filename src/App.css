@@ -8,3 +8,6 @@
 .site-gradient {
   background: linear-gradient(90deg, #19d3ae 0%, #0fcfec 100%);
 }
+.site-gradient:hover {
+  background: linear-gradient(-90deg, #19d3ae 0%, #0fcfec 100%);
+}
