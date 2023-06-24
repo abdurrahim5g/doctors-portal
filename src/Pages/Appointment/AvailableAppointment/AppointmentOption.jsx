@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const AppointmentOption = ({ option }) => {
+const AppointmentOption = ({ option, setTritment }) => {
   const { name, slots } = option;
   return (
     <div
@@ -11,12 +11,16 @@ const AppointmentOption = ({ option }) => {
         <p>{slots?.length > 0 && slots[0]}</p>
         <p>{slots.length} spaces available</p>
         <div className="card-actions mt-4">
-          <button
+          <label
+            htmlFor="booking_modal"
             className="btn site-gradient text-white border-0"
             disabled={slots.length === 0}
+            onClick={() => {
+              setTritment(option);
+            }}
           >
             Book Appointment
-          </button>
+          </label>
         </div>
       </div>
     </div>

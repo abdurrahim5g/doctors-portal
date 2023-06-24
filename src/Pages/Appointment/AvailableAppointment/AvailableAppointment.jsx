@@ -2,9 +2,11 @@
 import format from "date-fns/format";
 import { useEffect, useState } from "react";
 import AppointmentOption from "./AppointmentOption";
+import BookingModal from "../BoolingModal/BookingModal";
 
 const AvailableAppointment = ({ selectedDate }) => {
   const [appointmentOptions, setAppointmentOptions] = useState();
+  const [tritment, setTritment] = useState({});
 
   useEffect(() => {
     fetch(`appointmentOptions.json`)
@@ -27,10 +29,18 @@ const AvailableAppointment = ({ selectedDate }) => {
               <AppointmentOption
                 key={option._id}
                 option={option}
+                setTritment={setTritment}
               ></AppointmentOption>
             ))}
           </div>
         </div>
+
+        {tritment && (
+          <BookingModal
+            tritment={tritment}
+            selectedDate={selectedDate}
+          ></BookingModal>
+        )}
       </div>
     </section>
   );
