@@ -2,8 +2,22 @@ import { Link } from "react-router-dom";
 import "./SignUp.css";
 import google from "../../assets/images/google.png";
 import { useForm } from "react-hook-form";
+import { useAuthContex } from "../../Contex/AuthProvider";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const SignUp = () => {
+  // Use AuthContex
+  const { providerLogin } = useAuthContex();
+
+  // handle Provider login
+  const googleProvider = new GoogleAuthProvider();
+
+  const handleProviderLogin = (provider) => {
+    providerLogin(provider)
+      .then((result) => console.log(result.user))
+      .catch((err) => console.log(err.message));
+  };
+
   /**
    * React hook form steps
    * ^^^^^^^^^^^^^^^^^^^^^
@@ -109,7 +123,7 @@ const SignUp = () => {
             <div className="divider">OR</div>
 
             <div className="provider-login">
-              <button>
+              <button onClick={() => handleProviderLogin(googleProvider)}>
                 <img src={google} alt="Google Login button" />
               </button>
             </div>
