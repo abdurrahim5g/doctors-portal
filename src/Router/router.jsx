@@ -7,6 +7,8 @@ import Reviews from "../Pages/Reviews/Reviews";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import Admin from "../Layout/Admin";
+import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,16 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Admin></Admin>,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
       },
     ],
   },

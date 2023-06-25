@@ -2,23 +2,31 @@ import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
+import { useAuthContex } from "../../../Contex/AuthProvider";
 
 const Header = () => {
+  // Use AuthContex
+  const { user } = useAuthContex();
+
   const [show, setShow] = useState(false);
 
   const menuItems = (
     <>
       <NavLink to="/">home</NavLink>
-      <NavLink to="/about">about</NavLink>
-      <NavLink to="/appointment">appointment</NavLink>
-      <NavLink to="/reviews">reviews</NavLink>
-      <NavLink to="/contact-us">contact us</NavLink>
-      <NavLink to="/login">login</NavLink>
+      <NavLink to="/about">About</NavLink>
+      <NavLink to="/appointment">Appointment</NavLink>
+      <NavLink to="/reviews">Reviews</NavLink>
+      <NavLink to="/contact-us">Contact us</NavLink>
+      {!user?.uid ? (
+        <NavLink to="/login">Login</NavLink>
+      ) : (
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      )}
     </>
   );
 
   return (
-    <header className="header-component">
+    <header className="header-component shadow-lg z-50">
       <div className="site-container">
         <div className="navbar bg-base-100">
           <div className="flex-1">
@@ -39,16 +47,14 @@ const Header = () => {
                   className="absolute right-4 bg-white shadow-lg rounded-lg px-3 top-16 border-1 border"
                   onClick={() => setShow(!show)}
                 >
-                  <ul className="menu menu-vertical px-1 capitalize">
-                    {menuItems}
-                  </ul>
+                  <nav className="menu menu-vertical px-1 ">{menuItems}</nav>
                 </div>
               )}
             </div>
 
-            <ul className="menu menu-horizontal px-1 capitalize header-menu hidden md:block">
+            <nav className="menu menu-horizontal px-1  header-menu hidden md:block">
               {menuItems}
-            </ul>
+            </nav>
           </div>
         </div>
       </div>
