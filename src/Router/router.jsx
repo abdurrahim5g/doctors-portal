@@ -10,6 +10,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import Admin from "../Layout/Admin";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import Protected from "./Protected";
+import ResetPassword from "../Pages/ResetPassword/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/reset-password",
+        element: <ResetPassword></ResetPassword>,
       },
     ],
   },

@@ -92,6 +92,10 @@ const Login = () => {
                   {errors.password?.type === "minLength" &&
                     "Password at last 6 character"}
                 </span>
+
+                <Link className="forget-pass" to={"/reset-password"}>
+                  Forget Password
+                </Link>
               </div>
 
               <div className="form-control ">

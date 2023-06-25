@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -41,6 +42,9 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  /** send reset pass */
+  const resetPassword = (email) => sendPasswordResetEmail(auth, email);
+
   /**
    * Set objarver
    */
@@ -60,6 +64,7 @@ const AuthProvider = ({ children }) => {
     signUp,
     login,
     logOut,
+    resetPassword,
   };
   return <AuthContex.Provider value={authInfo}>{children}</AuthContex.Provider>;
 };
