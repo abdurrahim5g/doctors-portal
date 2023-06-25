@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import google from "../../assets/images/google.png";
 import { useForm } from "react-hook-form";
 import { useAuthContex } from "../../Contex/AuthProvider";
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, updateProfile } from "firebase/auth";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   // Use AuthContex
-  const { providerLogin } = useAuthContex();
+  const { providerLogin, signUp } = useAuthContex();
 
   // handle Provider login
   const googleProvider = new GoogleAuthProvider();
@@ -40,7 +45,22 @@ const SignUp = () => {
    */
   const handleSignup = (data) => {
     const { name, email, password } = data;
-    console.log(name, email, password);
+
+    if (name && email && password) {
+      signUp(email, password)
+        .then((result) => {
+          // console.log(result.user);
+          updateProfile(result.user, { displayName: name })
+            .then(() => navigate(from))
+            .catch((err) => console.log(err));
+          toast.success("Thanks for sign up");
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    } else {
+      toast.error("Something is wrong. Please try again!");
+    }
   };
 
   return (

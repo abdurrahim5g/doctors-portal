@@ -1,5 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
 import app from "../firebase/firebase.config";
 
 /* eslint-disable react/prop-types */
@@ -19,6 +24,11 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider);
   };
 
+  // Signup with email & pass
+  const signUp = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
   /**
    * Set objarver
    */
@@ -35,6 +45,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     providerLogin,
+    signUp,
   };
   return <AuthContex.Provider value={authInfo}>{children}</AuthContex.Provider>;
 };
