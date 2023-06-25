@@ -5,6 +5,7 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -35,6 +36,11 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  /** user Logout */
+  const logOut = () => {
+    return signOut(auth);
+  };
+
   /**
    * Set objarver
    */
@@ -53,6 +59,7 @@ const AuthProvider = ({ children }) => {
     providerLogin,
     signUp,
     login,
+    logOut,
   };
   return <AuthContex.Provider value={authInfo}>{children}</AuthContex.Provider>;
 };
