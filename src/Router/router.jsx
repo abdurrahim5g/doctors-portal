@@ -9,6 +9,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Admin from "../Layout/Admin";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
+import Protected from "./Protected";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +48,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Admin></Admin>,
+    element: (
+      <Protected>
+        <Admin></Admin>
+      </Protected>
+    ),
     children: [
       {
         path: "/dashboard",
