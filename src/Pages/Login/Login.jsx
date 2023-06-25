@@ -1,11 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import google from "../../assets/images/google.png";
 import { useForm } from "react-hook-form";
 import { useAuthContex } from "../../Contex/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -13,7 +18,7 @@ const Login = () => {
   } = useForm();
 
   // Use AuthContex
-  const { providerLogin } = useAuthContex();
+  const { providerLogin, login } = useAuthContex();
 
   // handle Provider login
   const googleProvider = new GoogleAuthProvider();
@@ -29,7 +34,20 @@ const Login = () => {
    * Login handler
    */
   const handleLogin = (data) => {
-    console.log(data);
+    const { email, password } = data;
+    if (email && password) {
+      login(email, password)
+        .then(() => {
+          toast.success("Login successful ✅🚀");
+          navigate(from);
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message);
+        });
+    } else {
+      toast.error("Please provide valid ✔ information");
+    }
   };
 
   return (

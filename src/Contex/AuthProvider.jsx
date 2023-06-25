@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
@@ -29,6 +30,11 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  /** Login with emain & password */
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   /**
    * Set objarver
    */
@@ -46,6 +52,7 @@ const AuthProvider = ({ children }) => {
     loading,
     providerLogin,
     signUp,
+    login,
   };
   return <AuthContex.Provider value={authInfo}>{children}</AuthContex.Provider>;
 };
