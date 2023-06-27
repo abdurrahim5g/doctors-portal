@@ -8,6 +8,8 @@ export default {
   plugins: [require("daisyui")],
   daisyui: {
     themes: [
+      "light",
+      "dark",
       {
         doctorTheme: {
           primary: "#0FCFEC",
