@@ -1,18 +1,21 @@
 /* eslint-disable react/prop-types */
 import format from "date-fns/format";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AppointmentOption from "./AppointmentOption";
 import BookingModal from "../BoolingModal/BookingModal";
+import { useQuery } from "react-query";
 
 const AvailableAppointment = ({ selectedDate }) => {
-  const [appointmentOptions, setAppointmentOptions] = useState();
   const [tritment, setTritment] = useState({});
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/appointmentOptions`)
-      .then((res) => res.json())
-      .then((data) => setAppointmentOptions(data));
-  }, []);
+  const { data: appointmentOptions } = useQuery(
+    "appointmentOptions",
+    async () => {
+      const res = await fetch(`http://localhost:5000/appointmentOptions`);
+      const data = await res.json();
+      return data;
+    }
+  );
 
   return (
     <section className="available-appointment py-14 md:py-20">
