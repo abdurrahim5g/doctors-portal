@@ -1,6 +1,16 @@
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuthContex } from "../../../Contex/AuthProvider";
+
 /* eslint-disable react/prop-types */
 const AppointmentOption = ({ option, setTritment }) => {
+  // get the user from AuthContex
+  const { user } = useAuthContex();
+  // console.log(user);
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { name, slots } = option;
+
   return (
     <div
       className="cardbg-base-100 shadow-xl rounded-lg"
@@ -16,7 +26,14 @@ const AppointmentOption = ({ option, setTritment }) => {
             className="btn site-gradient text-white border-0"
             disabled={slots.length === 0}
             onClick={() => {
-              setTritment(option);
+              if (user !== null) {
+                setTritment(option);
+              } else {
+                navigate("/login", {
+                  state: { from: location },
+                  replace: true,
+                });
+              }
             }}
           >
             Book Appointment

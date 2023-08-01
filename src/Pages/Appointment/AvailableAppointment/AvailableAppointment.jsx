@@ -21,7 +21,7 @@ const AvailableAppointment = ({ selectedDate }) => {
     <section className="available-appointment py-14 md:py-20">
       <div className="site-container">
         <div className="row">
-          <h2 className="text-2xl text-center text-secondary">
+          <h2 className="text-2xl text-center text-accent font-semibold">
             Available Appointments on {format(selectedDate, "PP")}
           </h2>
         </div>

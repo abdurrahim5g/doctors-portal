@@ -10,6 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const {
     register,
@@ -25,7 +26,10 @@ const Login = () => {
 
   const handleProviderLogin = (provider) => {
     providerLogin(provider)
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        console.log(result.user);
+        navigate(from);
+      })
       .catch((err) => console.log(err.message));
   };
 
