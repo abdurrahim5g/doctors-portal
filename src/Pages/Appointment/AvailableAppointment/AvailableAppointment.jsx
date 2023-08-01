@@ -7,22 +7,25 @@ import { useQuery } from "react-query";
 
 const AvailableAppointment = ({ selectedDate }) => {
   const [tritment, setTritment] = useState({});
+  const formatedDate = format(selectedDate, "PP");
 
-  const { data: appointmentOptions } = useQuery(
-    "appointmentOptions",
-    async () => {
-      const res = await fetch(`http://localhost:5000/appointmentOptions`);
+  const { data: appointmentOptions, refetch } = useQuery({
+    queryKey: ["appointmentOptions", formatedDate],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/appointmentOptions?date=${formatedDate}`
+      );
       const data = await res.json();
       return data;
-    }
-  );
+    },
+  });
 
   return (
     <section className="available-appointment py-14 md:py-20">
       <div className="site-container">
         <div className="row">
           <h2 className="text-2xl text-center text-accent font-semibold">
-            Available Appointments on {format(selectedDate, "PP")}
+            Available Appointments on {formatedDate}
           </h2>
         </div>
 
@@ -43,6 +46,7 @@ const AvailableAppointment = ({ selectedDate }) => {
             tritment={tritment}
             setTritment={setTritment}
             selectedDate={selectedDate}
+            refetch={refetch}
           ></BookingModal>
         )}
       </div>

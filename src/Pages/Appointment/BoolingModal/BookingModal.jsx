@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 /* eslint-disable react/prop-types */
-const BookingModal = ({ tritment, selectedDate, setTritment }) => {
+const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
   // get user from AuthContex
   const { user } = useAuthContex();
 
@@ -38,6 +38,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
+          refetch();
           setTritment(null);
           toast.success("Booking successfully ✅");
         } else {
