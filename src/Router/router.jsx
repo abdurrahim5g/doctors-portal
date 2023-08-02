@@ -11,6 +11,7 @@ import Admin from "../Layout/Admin";
 import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import Protected from "./Protected";
 import ResetPassword from "../Pages/ResetPassword/ResetPassword";
+import UserAppointments from "../Pages/Dashboard/UserAppointments/UserAppointments";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard></Dashboard>,
+      },
+      {
+        path: "my-appointments",
+        element: <UserAppointments />,
       },
     ],
   },

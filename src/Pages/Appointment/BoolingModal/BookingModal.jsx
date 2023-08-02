@@ -9,7 +9,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
   const { user } = useAuthContex();
 
   const { name: tritmentName, slots } = tritment;
-  const appointmentData = format(selectedDate, "PP");
+  const appointmentDate = format(selectedDate, "PP");
 
   // useForm from "react-hook-form"
   const {
@@ -20,7 +20,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
 
   const handleBooking = (data) => {
     const bookingsData = {
-      appointmentData,
+      appointmentDate,
       pashent: user?.displayName,
       email: user?.email,
       tritmentName,
@@ -88,7 +88,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
                 </div>
                 <input
                   type="text"
-                  value={appointmentData}
+                  value={appointmentDate}
                   className="input input-bordered w-full"
                   disabled
                 />
