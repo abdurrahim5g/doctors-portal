@@ -37,12 +37,12 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setTritment(null);
         if (data.acknowledged) {
           refetch();
-          setTritment(null);
           toast.success("Booking successfully ✅");
         } else {
-          toast.error("Something is wrong. Please try again!");
+          toast.error(data.message);
         }
       })
       .catch((err) => console.log(err));
