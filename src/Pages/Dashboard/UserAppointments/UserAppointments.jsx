@@ -9,7 +9,12 @@ const UserAppointments = () => {
     queryKey: ["bookings"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/bookings?email=${user?.email}`
+        `http://localhost:5000/bookings?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
       );
       const data = await res.json();
       return data;
@@ -39,14 +44,14 @@ const UserAppointments = () => {
                 </tr>
               </thead>
               <tbody>
-                {data?.map((single, index) => (
-                  <tr key={single._id}>
+                {data?.map((booking, index) => (
+                  <tr key={booking._id}>
                     <th>#{++index}</th>
-                    <td>{single.pashent}</td>
-                    <td>{single.tritmentName}</td>
-                    <td>{single.phone}</td>
-                    <td>{single.appointmentDate}</td>
-                    <td>{single.slot}</td>
+                    <td>{booking.pashent}</td>
+                    <td>{booking.tritmentName}</td>
+                    <td>{booking.phone}</td>
+                    <td>{booking.appointmentDate}</td>
+                    <td>{booking.slot}</td>
                   </tr>
                 ))}
               </tbody>
