@@ -19,7 +19,10 @@ const SignUp = () => {
 
   const handleProviderLogin = (provider) => {
     providerLogin(provider)
-      .then((result) => console.log(result.user))
+      .then((result) => {
+        const user = result.user;
+        sendUserInfo(user.displayName, user.email);
+      })
       .catch((err) => console.log(err.message));
   };
 
@@ -51,9 +54,11 @@ const SignUp = () => {
         .then((result) => {
           // console.log(result.user);
           updateProfile(result.user, { displayName: name })
-            .then(() => navigate(from))
+            .then(() => {
+              // navigate(from);
+              sendUserInfo(name, email);
+            })
             .catch((err) => console.log(err));
-          toast.success("Thanks for sign up");
         })
         .catch((err) => {
           toast.error(err.message);
@@ -61,6 +66,29 @@ const SignUp = () => {
     } else {
       toast.error("Something is wrong. Please try again!");
     }
+  };
+
+  /**
+   * Send user [name/email] to the database
+   */
+  const sendUserInfo = (name, email) => {
+    const userInfo = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Sign up sucessfully ✅");
+          navigate(from);
+        } else {
+          toast.error("Something is wrong! Please try again 🔃");
+        }
+      });
   };
 
   return (

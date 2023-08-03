@@ -27,8 +27,8 @@ const Login = () => {
   const handleProviderLogin = (provider) => {
     providerLogin(provider)
       .then((result) => {
-        console.log(result.user);
-        navigate(from);
+        const user = result.user;
+        sendUserInfo(user.displayName, user.email);
       })
       .catch((err) => console.log(err.message));
   };
@@ -52,6 +52,29 @@ const Login = () => {
     } else {
       toast.error("Please provide valid ✔ information");
     }
+  };
+
+  /**
+   * Send user [name/email] to the database
+   */
+  const sendUserInfo = (name, email) => {
+    const userInfo = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userInfo),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Sign up sucessfully ✅");
+          navigate(from);
+        } else {
+          toast.error("Something is wrong! Please try again 🔃");
+        }
+      });
   };
 
   return (
