@@ -21,7 +21,7 @@ const SignUp = () => {
     providerLogin(provider)
       .then((result) => {
         const user = result.user;
-        sendUserInfo(user.displayName, user.email);
+        saveUserInfo(user.displayName, user.email);
       })
       .catch((err) => console.log(err.message));
   };
@@ -56,7 +56,7 @@ const SignUp = () => {
           updateProfile(result.user, { displayName: name })
             .then(() => {
               // navigate(from);
-              sendUserInfo(name, email);
+              saveUserInfo(name, email);
             })
             .catch((err) => console.log(err));
         })
@@ -71,7 +71,7 @@ const SignUp = () => {
   /**
    * Send user [name/email] to the database
    */
-  const sendUserInfo = (name, email) => {
+  const saveUserInfo = (name, email) => {
     const userInfo = { name, email };
     fetch("http://localhost:5000/users", {
       method: "POST",
@@ -84,9 +84,26 @@ const SignUp = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Sign up sucessfully ✅");
-          navigate(from);
+          // navigate(from);
+          getUserToken(email);
         } else {
           toast.error("Something is wrong! Please try again 🔃");
+        }
+      });
+  };
+
+  /**
+   * GET token
+   * =============
+   */
+  const getUserToken = (email) => {
+    const url = `http://localhost:5000/jwt?email=${email}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate(from);
         }
       });
   };
