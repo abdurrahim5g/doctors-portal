@@ -1,12 +1,35 @@
 import { useQuery } from "react-query";
 import "./AllUsers.css";
 import Loading from "../../../components/Loading/Loading";
+import { toast } from "react-hot-toast";
 const AllUsers = () => {
-  const { data: users = [], isLoading } = useQuery(["users"], async () => {
+  // get users data
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery(["users"], async () => {
     const res = await fetch("http://localhost:5000/users");
     const data = await res.json();
     return data;
   });
+
+  // handle Make Admin
+  const handleMakeAdmin = (id) => {
+    fetch(`http://localhost:5000/make-admin?id=${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const { modifiedCount, acknowledged } = data;
+        if (modifiedCount && acknowledged) {
+          toast.success("Make admin sucessfuly ✔");
+          refetch();
+        } else {
+          toast.error("Something is wrong please try again");
+        }
+      });
+  };
 
   return (
     <div className="all-users-page">
@@ -20,8 +43,8 @@ const AllUsers = () => {
 
             {users.length > 0 && (
               <table className="table table-zebra table-pin-rows">
-                <thead className="bg-gray-100">
-                  <tr>
+                <thead className="">
+                  <tr className="bg-gray-100 text-base">
                     <th>SL/No</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -35,10 +58,13 @@ const AllUsers = () => {
                       <th>{++index}</th>
                       <td>{user.name}</td>
                       <td>{user.email}</td>
-                      <td>{user.role || "Visitors"}</td>
+                      <td className="capitalize">{user.role || "Visitors"}</td>
                       <td>
                         {user.role !== "admin" && (
-                          <button className="btn btn-success btn-xs">
+                          <button
+                            className="btn btn-success btn-xs text-xs"
+                            onClick={() => handleMakeAdmin(user._id)}
+                          >
                             Make Admin
                           </button>
                         )}
