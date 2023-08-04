@@ -25,10 +25,10 @@ const AdminNavbar = () => {
     <nav className="admin-navbar-component admin-nav ">
       <NavLink to="/dashboard/">Dashboard</NavLink>
       <NavLink to="/dashboard/my-appointments">My Appointments</NavLink>
-      <NavLink to="/">All users</NavLink>
-      <NavLink to="/">Add doctor</NavLink>
-      <NavLink to="/">Manage Doctor</NavLink>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/dashboard/all-users">All users</NavLink>
+      {/* <NavLink to="/">Add doctor</NavLink>
+      <NavLink to="/">Manage Doctor</NavLink> */}
+      <NavLink to="/">Go Home</NavLink>
       <button className="btn btn-accent m-7" onClick={handleLogout}>
         Logout
       </button>

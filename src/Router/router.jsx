@@ -12,6 +12,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import Protected from "./Protected";
 import ResetPassword from "../Pages/ResetPassword/ResetPassword";
 import UserAppointments from "../Pages/Dashboard/UserAppointments/UserAppointments";
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "my-appointments",
         element: <UserAppointments />,
+      },
+      {
+        path: "all-users",
+        element: <AllUsers />,
       },
     ],
   },
