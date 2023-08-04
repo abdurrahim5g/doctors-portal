@@ -5,12 +5,21 @@ import { useForm } from "react-hook-form";
 import { useAuthContex } from "../../Contex/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import { toast } from "react-hot-toast";
+import useToken from "../../hooks/useToken";
+import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
+  // console.log(from);
+
+  const [userEmail, setUserEmail] = useState("");
+  const [token] = useToken(userEmail);
+
+  if (token) {
+    navigate(from);
+  }
 
   const {
     register,
@@ -43,7 +52,7 @@ const Login = () => {
       login(email, password)
         .then(() => {
           toast.success("Login successful ✅🚀");
-          getUserToken(email);
+          setUserEmail(email);
         })
         .catch((err) => {
           console.log(err);
@@ -70,25 +79,9 @@ const Login = () => {
       .then((data) => {
         if (data.acknowledged) {
           toast.success("Sign up sucessfully ✅");
-          getUserToken(email);
+          setUserEmail(email);
         } else {
           toast.error("Something is wrong! Please try again 🔃");
-        }
-      });
-  };
-
-  /**
-   * GET token
-   * =============
-   */
-  const getUserToken = (email) => {
-    const url = `http://localhost:5000/jwt?email=${email}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.accessToken) {
-          localStorage.setItem("accessToken", data.accessToken);
-          navigate(from);
         }
       });
   };
