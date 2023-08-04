@@ -25,7 +25,6 @@ const UserAppointments = () => {
   return (
     <div className="dashboard-page">
       <h2 className="text-2xl font-semibold mb-3">My Appointments</h2>
-      <h3 className="leading-loose">Email Address: {user?.email}</h3>
 
       <div className="dashboard-content bg-white py-6 px-5 rounded-lg shadow-lg">
         <div className="overflow-x-auto">
