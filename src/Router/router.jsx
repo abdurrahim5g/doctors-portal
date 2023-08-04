@@ -13,6 +13,7 @@ import Protected from "./Protected";
 import ResetPassword from "../Pages/ResetPassword/ResetPassword";
 import UserAppointments from "../Pages/Dashboard/UserAppointments/UserAppointments";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +72,11 @@ const router = createBrowserRouter([
       },
       {
         path: "all-users",
-        element: <AllUsers />,
+        element: (
+          <AdminRoute>
+            <AllUsers />
+          </AdminRoute>
+        ),
       },
     ],
   },

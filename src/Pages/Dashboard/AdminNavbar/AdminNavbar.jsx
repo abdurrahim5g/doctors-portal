@@ -2,10 +2,13 @@ import { toast } from "react-hot-toast";
 import { useAuthContex } from "../../../Contex/AuthProvider";
 import "./AdminNavbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import useAdmin from "../../../hooks/useAdmin";
 
 const AdminNavbar = () => {
   /** Use AuthContex */
-  const { logOut } = useAuthContex();
+  const { logOut, user } = useAuthContex();
+
+  const [isAdmin] = useAdmin(user?.email);
 
   const navigate = useNavigate();
 
@@ -25,9 +28,13 @@ const AdminNavbar = () => {
     <nav className="admin-navbar-component admin-nav ">
       <NavLink to="/dashboard/">Dashboard</NavLink>
       <NavLink to="/dashboard/my-appointments">My Appointments</NavLink>
-      <NavLink to="/dashboard/all-users">All users</NavLink>
-      {/* <NavLink to="/">Add doctor</NavLink>
-      <NavLink to="/">Manage Doctor</NavLink> */}
+
+      {isAdmin && (
+        <>
+          <NavLink to="/dashboard/all-users">All users</NavLink>
+        </>
+      )}
+
       <NavLink to="/">Go Home</NavLink>
       <button className="btn btn-accent m-7" onClick={handleLogout}>
         Logout
