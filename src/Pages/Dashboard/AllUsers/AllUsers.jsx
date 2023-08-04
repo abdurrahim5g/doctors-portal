@@ -18,6 +18,9 @@ const AllUsers = () => {
   const handleMakeAdmin = (id) => {
     fetch(`http://localhost:5000/make-admin?id=${id}`, {
       method: "PATCH",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -26,7 +29,7 @@ const AllUsers = () => {
           toast.success("Make admin sucessfuly ✔");
           refetch();
         } else {
-          toast.error("Something is wrong please try again");
+          toast.error(data.message || "Something is wrong please try again");
         }
       });
   };
@@ -49,7 +52,7 @@ const AllUsers = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Make Admin</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
