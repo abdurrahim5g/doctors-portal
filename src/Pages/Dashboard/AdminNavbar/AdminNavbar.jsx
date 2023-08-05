@@ -32,6 +32,7 @@ const AdminNavbar = () => {
       {isAdmin && (
         <>
           <NavLink to="/dashboard/all-users">All users</NavLink>
+          <NavLink to="/dashboard/add-doctor">Add Doctor</NavLink>
         </>
       )}
 
