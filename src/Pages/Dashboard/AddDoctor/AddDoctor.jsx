@@ -2,6 +2,8 @@ import { useQuery } from "react-query";
 import { useAuthContex } from "../../../Contex/AuthProvider";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { FaRegImage } from "react-icons/fa";
+import "./AddDoctor.css";
 
 const AddDoctor = () => {
   // get user data from AuthContex
@@ -20,6 +22,7 @@ const AddDoctor = () => {
    * Handle add doctor
    */
   const [formError, setFormError] = useState({});
+  const [avater, setAvater] = useState(null);
   const {
     register,
     handleSubmit,
@@ -34,6 +37,11 @@ const AddDoctor = () => {
     } else {
       setFormError({});
     }
+  };
+
+  const handleAvater = (e) => {
+    const selected = e.target.files[0];
+    setAvater(selected);
   };
 
   return (
@@ -92,6 +100,32 @@ const AddDoctor = () => {
               ))}
             </select>
             <p className="text-red-500">{formError.doctorSpeciality}</p>
+          </div>
+          <div className="form-control w-full mb-6 max-w-lg">
+            <label
+              className="label block text-center doctor-avater"
+              htmlFor="avater"
+            >
+              {!avater ? (
+                <>
+                  Select doctor photo <br />
+                  <FaRegImage />
+                </>
+              ) : (
+                `You are selected: ${avater.name}`
+              )}
+            </label>
+            <input
+              type="file"
+              name="avater"
+              id="avater"
+              hidden
+              {...register("avater", { required: true })}
+              onChange={(e) => handleAvater(e)}
+            />
+            <p className="text-red-500">
+              {errors.avater && "Please select doctor avater."}
+            </p>
           </div>
 
           <div className="form-control w-full mb-6  max-w-lg">
