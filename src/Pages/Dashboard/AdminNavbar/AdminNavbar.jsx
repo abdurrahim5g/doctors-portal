@@ -33,6 +33,7 @@ const AdminNavbar = () => {
         <>
           <NavLink to="/dashboard/all-users">All users</NavLink>
           <NavLink to="/dashboard/add-doctor">Add Doctor</NavLink>
+          <NavLink to="/dashboard/manage-doctors">Manage Doctors</NavLink>
         </>
       )}
 
