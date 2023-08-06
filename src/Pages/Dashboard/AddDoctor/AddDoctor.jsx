@@ -63,7 +63,7 @@ const AddDoctor = () => {
             .then((data) => {
               if (data.acknowledged) {
                 reset();
-                toast.success(`${doctor.name} doctor added successfuly ✔`);
+                toast.success(`${doctor.name} added successfuly ✔`);
               }
             });
         }
