@@ -2,18 +2,19 @@ import { useQuery } from "react-query";
 import "./AllUsers.css";
 import Loading from "../../../components/Loading/Loading";
 import { toast } from "react-hot-toast";
-import { useAuthContex } from "../../../Contex/AuthProvider";
+
 const AllUsers = () => {
-  const { user: currentUser } = useAuthContex();
   // get users data
   const {
     data: users = [],
     isLoading,
     refetch,
   } = useQuery(["users"], async () => {
-    const res = await fetch(
-      `http://localhost:5000/users?email=${currentUser.email}`
-    );
+    const res = await fetch(`http://localhost:5000/users`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
     const data = await res.json();
     return data;
   });

@@ -6,16 +6,15 @@ import { FaRegImage } from "react-icons/fa";
 import "./AddDoctor.css";
 
 const AddDoctor = () => {
-  // get user data from AuthContex
-  const { user } = useAuthContex();
-
   // imageBB API key
   const imagebbAPI = import.meta.env.VITE_imagebb_api;
 
   const { data: speciality = [] } = useQuery(["speciality"], async () => {
-    const res = await fetch(
-      `http://localhost:5000/speciality?email=${user?.email}`
-    );
+    const res = await fetch(`http://localhost:5000/speciality`, {
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
     const data = await res.json();
     return data;
   });
