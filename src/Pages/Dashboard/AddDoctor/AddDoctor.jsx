@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaRegImage } from "react-icons/fa";
 import "./AddDoctor.css";
+import { toast } from "react-hot-toast";
 
 const AddDoctor = () => {
   // imageBB API key
@@ -26,6 +27,7 @@ const AddDoctor = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -33,8 +35,8 @@ const AddDoctor = () => {
     const avatar = data.avatar[0];
     const formData = new FormData();
     formData.append("image", avatar);
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imagebbAPI}`;
-    console.log(formData, avatar);
+    const url = `https://api.imgbb.com/1/upload?key=${imagebbAPI}`;
+    // console.log(formData, avatar);
 
     fetch(url, {
       method: "POST",
@@ -59,7 +61,10 @@ const AddDoctor = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
+              if (data.acknowledged) {
+                reset();
+                toast.success(`${doctor.name} doctor added successfuly ✔`);
+              }
             });
         }
       });
