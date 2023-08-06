@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { useAuthContex } from "../../../Contex/AuthProvider";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { FaRegImage } from "react-icons/fa";
