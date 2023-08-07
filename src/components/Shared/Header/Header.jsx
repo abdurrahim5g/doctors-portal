@@ -20,7 +20,7 @@ const Header = () => {
       {!user?.uid ? (
         <NavLink to="/login">Login</NavLink>
       ) : (
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/dashboard/">Dashboard</NavLink>
       )}
     </>
   );

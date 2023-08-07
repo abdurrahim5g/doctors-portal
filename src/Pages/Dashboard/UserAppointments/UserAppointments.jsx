@@ -55,7 +55,10 @@ const UserAppointments = () => {
                     <td>{booking.slot}</td>
                     <td>
                       {booking.price && !booking.paid && (
-                        <Link className="btn btn-xs btn-secondary">
+                        <Link
+                          className="btn btn-xs btn-secondary"
+                          to={`/dashboard/payment/${booking._id}`}
+                        >
                           Pay ${booking.price}
                         </Link>
                       )}
