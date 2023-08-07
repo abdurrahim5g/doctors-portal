@@ -8,7 +8,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
   // get user from AuthContex
   const { user } = useAuthContex();
 
-  const { name: tritmentName, slots } = tritment;
+  const { name: tritmentName, slots, price } = tritment;
   const appointmentDate = format(selectedDate, "PP");
 
   // useForm from "react-hook-form"
@@ -24,6 +24,7 @@ const BookingModal = ({ tritment, selectedDate, setTritment, refetch }) => {
       pashent: user?.displayName,
       email: user?.email,
       tritmentName,
+      price,
       ...data,
     };
     console.log("Click");

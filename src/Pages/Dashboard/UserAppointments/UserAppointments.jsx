@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { useAuthContex } from "../../../Contex/AuthProvider";
 import Loading from "../../../components/Loading/Loading";
+import { Link } from "react-router-dom";
 
 const UserAppointments = () => {
   const { user } = useAuthContex();
@@ -40,6 +41,7 @@ const UserAppointments = () => {
                   <th>Phone</th>
                   <th>Date</th>
                   <th>Time Slot</th>
+                  <th>Pay</th>
                 </tr>
               </thead>
               <tbody>
@@ -51,6 +53,16 @@ const UserAppointments = () => {
                     <td>{booking.phone}</td>
                     <td>{booking.appointmentDate}</td>
                     <td>{booking.slot}</td>
+                    <td>
+                      {booking.price && !booking.paid && (
+                        <Link className="btn btn-xs btn-secondary">
+                          Pay ${booking.price}
+                        </Link>
+                      )}
+                      {booking?.paid && (
+                        <div className="badge badge-primary">Paid</div>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>
