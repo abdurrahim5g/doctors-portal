@@ -9,7 +9,7 @@ const AppointmentOption = ({ option, setTritment }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { name, slots } = option;
+  const { name, slots, price } = option;
 
   return (
     <div
@@ -20,6 +20,9 @@ const AppointmentOption = ({ option, setTritment }) => {
         <h2 className="card-title">{name}</h2>
         <p>{slots?.length > 0 && slots[0]}</p>
         <p>{slots.length} spaces available</p>
+        <p>
+          <small>Price: ${price}</small>
+        </p>
         <div className="card-actions mt-4">
           <label
             htmlFor="booking_modal"
