@@ -1,14 +1,21 @@
 import { Elements } from "@stripe/react-stripe-js";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import Loading from "../../../components/Loading/Loading";
 
 const stripePromise = loadStripe(import.meta.env.VITE_stripe_pk);
 
 const Payment = () => {
+  const navigation = useNavigation();
+
   const bookingInfo = useLoaderData();
   // console.log(bookingInfo);
   const { pashent, price, tritmentName } = bookingInfo;
+
+  if (navigation.state === "loading") {
+    return <Loading />;
+  }
 
   return (
     <div className="payment-page">
