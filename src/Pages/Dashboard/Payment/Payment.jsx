@@ -1,8 +1,13 @@
+import { Elements } from "@stripe/react-stripe-js";
 import { useLoaderData } from "react-router-dom";
+import CheckoutForm from "./CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_stripe_pk);
 
 const Payment = () => {
   const data = useLoaderData();
-  console.log(data);
+  // console.log(data);
   const { pashent, price, tritmentName } = data;
 
   return (
@@ -13,6 +18,12 @@ const Payment = () => {
         <p>
           Please pay <strong>${price}</strong> for booking {tritmentName}
         </p>
+
+        <div className="checkout-form-payment-page">
+          <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        </div>
       </div>
     </div>
   );
