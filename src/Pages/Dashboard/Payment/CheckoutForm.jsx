@@ -1,9 +1,13 @@
+/* eslint-disable react/prop-types */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ bookingInfo }) => {
   const stripe = useStripe();
   const elements = useElements();
+
+  // props check
+  console.log(bookingInfo);
 
   // State's
   const [error, setError] = useState("");

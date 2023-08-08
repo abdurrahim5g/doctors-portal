@@ -6,9 +6,9 @@ import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe(import.meta.env.VITE_stripe_pk);
 
 const Payment = () => {
-  const data = useLoaderData();
-  // console.log(data);
-  const { pashent, price, tritmentName } = data;
+  const bookingInfo = useLoaderData();
+  // console.log(bookingInfo);
+  const { pashent, price, tritmentName } = bookingInfo;
 
   return (
     <div className="payment-page">
@@ -21,7 +21,7 @@ const Payment = () => {
 
         <div className="checkout-form-payment-page">
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
+            <CheckoutForm bookingInfo={bookingInfo} />
           </Elements>
         </div>
       </div>
