@@ -1,0 +1,7 @@
+.error-title {
+  font-size: 100px;
+  font-weight: 700;
+  background-image: url(./text-bg.png);
+  color: transparent;
+  background-clip: text;
+}

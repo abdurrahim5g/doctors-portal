@@ -17,11 +17,13 @@ import AdminRoute from "./AdminRoute";
 import AddDoctor from "../Pages/Dashboard/AddDoctor/AddDoctor";
 import ManageDoctors from "../Pages/Dashboard/ManageDoctors/ManageDoctors";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import ErrorElement from "../components/Shared/ErrorElement/ErrorElement";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "/",
@@ -64,6 +66,7 @@ const router = createBrowserRouter([
         <Admin></Admin>
       </Protected>
     ),
+    errorElement: <ErrorElement />,
     children: [
       {
         path: "/dashboard/",
