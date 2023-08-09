@@ -102,11 +102,7 @@ const router = createBrowserRouter([
       },
       {
         path: "payment/:id",
-        element: (
-          <AdminRoute>
-            <Payment />
-          </AdminRoute>
-        ),
+        element: <Payment />,
         loader: ({ params }) =>
           fetch(
             `https://doctors-portal-server-cyan-theta.vercel.app/bookings/${params.id}`
