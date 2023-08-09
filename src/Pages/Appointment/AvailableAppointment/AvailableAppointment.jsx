@@ -13,7 +13,7 @@ const AvailableAppointment = ({ selectedDate }) => {
     queryKey: ["appointmentOptions", formatedDate],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/v2/appointmentOptions?date=${formatedDate}`
+        `https://doctors-portal-server-cyan-theta.vercel.app/v2/appointmentOptions?date=${formatedDate}`
       );
       const data = await res.json();
       return data;

@@ -25,11 +25,14 @@ const CheckoutForm = ({ bookingInfo }) => {
 
   // UseEffect
   useEffect(() => {
-    fetch("http://localhost:5000/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ price }),
-    })
+    fetch(
+      "https://doctors-portal-server-cyan-theta.vercel.app/create-payment-intent",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ price }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -93,7 +96,7 @@ const CheckoutForm = ({ bookingInfo }) => {
         bookingId: _id,
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://doctors-portal-server-cyan-theta.vercel.app/payments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

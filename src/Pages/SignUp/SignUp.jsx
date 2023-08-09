@@ -73,7 +73,7 @@ const SignUp = () => {
    */
   const saveUserInfo = (name, email) => {
     const userInfo = { name, email };
-    fetch("http://localhost:5000/users", {
+    fetch("https://doctors-portal-server-cyan-theta.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -97,7 +97,7 @@ const SignUp = () => {
    * =============
    */
   const getUserToken = (email) => {
-    const url = `http://localhost:5000/jwt?email=${email}`;
+    const url = `https://doctors-portal-server-cyan-theta.vercel.app/jwt?email=${email}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

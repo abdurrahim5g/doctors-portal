@@ -10,7 +10,7 @@ const AllUsers = () => {
     isLoading,
     refetch,
   } = useQuery(["users"], async () => {
-    const res = await fetch(`http://localhost:5000/users`, {
+    const res = await fetch(`https://doctors-portal-server-cyan-theta.vercel.app/users`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -21,7 +21,7 @@ const AllUsers = () => {
 
   // handle Make Admin
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/make-admin?id=${id}`, {
+    fetch(`https://doctors-portal-server-cyan-theta.vercel.app/make-admin?id=${id}`, {
       method: "PATCH",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

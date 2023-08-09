@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const useToken = (email) => {
   const [token, setToken] = useState("");
   useEffect(() => {
-    const url = `http://localhost:5000/jwt?email=${email}`;
+    const url = `https://doctors-portal-server-cyan-theta.vercel.app/jwt?email=${email}`;
     if (email) {
       fetch(url)
         .then((res) => res.json())

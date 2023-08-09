@@ -10,11 +10,14 @@ const AddDoctor = () => {
   const imagebbAPI = import.meta.env.VITE_imagebb_api;
 
   const { data: speciality = [] } = useQuery(["speciality"], async () => {
-    const res = await fetch(`http://localhost:5000/speciality`, {
-      headers: {
-        authorization: `bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
+    const res = await fetch(
+      `https://doctors-portal-server-cyan-theta.vercel.app/speciality`,
+      {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
     const data = await res.json();
     return data;
   });
@@ -51,7 +54,7 @@ const AddDoctor = () => {
             speciality: data.speciality,
             img: imageData.data.url,
           };
-          fetch(`http://localhost:5000/doctors`, {
+          fetch(`https://doctors-portal-server-cyan-theta.vercel.app/doctors`, {
             method: "POST",
             headers: {
               "content-type": "application/json",

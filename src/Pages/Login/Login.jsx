@@ -68,7 +68,7 @@ const Login = () => {
    */
   const saveUserInfo = (name, email) => {
     const userInfo = { name, email };
-    fetch("http://localhost:5000/users", {
+    fetch("https://doctors-portal-server-cyan-theta.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
